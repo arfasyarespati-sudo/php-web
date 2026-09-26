@@ -1,42 +1,37 @@
 <?php
-include 'database.php';
+// database connection
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include_once("config.php");
  
-$result = $conn->query("SELECT * FROM data_siswa");
+// fetch all user
+$result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC");
 ?>
  
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Data Siswa</title>
+<html>
+<head>    
+    <title>Homepage</title>
 </head>
+ 
 <body>
-    <h2>Data Siswa</h2>
-    <a href="create.php">Tambah Siswa</a>
-    <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>ID</th>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Telepon</th>
-            <th>Alamat</th>
-            <th>Tanggal Lahir</th>
-            <th>Aksi</th>
-        </tr>
-        <?php while ($row = $result->fetch_assoc()): ?>
-        <tr>
-            <td><?= $row['id']; ?></td>
-            <td><?= $row['nama']; ?></td>
-            <td><?= $row['email']; ?></td>
-            <td><?= $row['telepon']; ?></td>
-            <td><?= $row['alamat']; ?></td>
-            <td><?= $row['tanggal_lahir']; ?></td>
-            <td>
-                <a href="edit.php?id=<?= $row['id']; ?>">Edit</a> |
-                <a href="delete.php?id=<?= $row['id']; ?>" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-            </td>
-        </tr>
-        <?php endwhile; ?>
+<a href="add.php">Add New User</a><br/><br/>
+ 
+    <table width='80%' border=1>
+ 
+    <tr>
+        <th>Name</th> <th>Mobile</th> <th>Email</th> <th>Update</th>
+    </tr>
+    <?php  
+    while($user_data = mysqli_fetch_array($result)) {         
+        echo "<tr>";
+        echo "<td>".$user_data['name']."</td>";
+        echo "<td>".$user_data['mobile']."</td>";
+        echo "<td>".$user_data['email']."</td>";    
+        echo "<td><a href='edit.php?id=$user_data[id]'>Edit</a> | <a href='delete.php?id=$user_data[id]'>Delete</a></td></tr>";        
+    }
+    ?>
     </table>
 </body>
 </html>
