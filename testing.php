@@ -3,22 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>testing</title>
 </head>
 <body>
+    <h1>hi</h1>
     <?php
-    $nim = 255150700111041;
-    $name = 'Muhammad Arfasya Respati Priyadi';
-
-    echo "$nim $name";
-
-    $sahroni = 
-    array('bali' => 'Brian',
-            'sulawesi barat' => 'Qalbi',
-            'malang' => 'jason'    
-    );
-    echo $sahroni
+        echo 'hi from php';
+    
     ?>
 </body>
 </html>
-
